@@ -19,19 +19,26 @@
 O projeto está organizado nas seguintes camadas:
 
 - **DAO (Data Access Object)**: Manipulação e gerenciamento de dados para persistência no banco de dados.
-- **Model**: Representação das entidades de negócio (como `Mercado` e `Produto`) e seus atributos e métodos.
-- **Services**: Lógica de negócios e funcionalidades principais (como comparações e filtros de preferências).
+   - **IDatabaseConnection**: Interface para conectar e desconectar do banco de dados.
+   - **MySQLDatabaseConnection**: Implementação específica para o banco de dados MySQL.
+   - **MercadoDAO e ProdutoDAO**: Realizam operações CRUD para as entidades `Mercado` e `Produto`.
+- **Model**: Representação das entidades de negócio (como `Mercado`, `Produto` e `Avaliacao`), com atributos e métodos.
+- **Services**: Lógica de negócios e funcionalidades principais.
+   - **ComparadorDePrecos**: Classe para comparar preços de produtos em mercados.
+   - **FiltroDePreferencias**: Métodos para filtrar produtos conforme disponibilidade, preço e marca.
+   - **AplicativoBuscAi**: Classe principal que integra as funcionalidades do sistema.
 
 ## Tecnologias Utilizadas
 
-- **Java**: Desenvolvimento back-end.
+- **Java**: Desenvolvimento do backend.
 - **MySQL**: Banco de dados relacional para armazenamento de informações de mercados e produtos.
 - **Apache NetBeans**: IDE para o desenvolvimento e gerenciamento do projeto.
 - **Git/GitHub**: Controle de versão e colaboração.
 
 ## Instalação e Configuração
 
-1. **Clone o Repositório**:
-   ```bash
-   git clone https://github.com/seu-usuario/BuscAi.git
-   cd BuscAi
+### 1. Clone o Repositório
+
+```bash
+git clone https://github.com/seu-usuario/BuscAi.git
+cd BuscAi

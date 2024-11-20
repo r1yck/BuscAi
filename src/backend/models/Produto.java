@@ -4,13 +4,15 @@ public class Produto {
     private int id;
     private String nome;
     private double preco;
-    private boolean disponivel; // Indica se o produto está disponível
+    private boolean disponivel;
+    private Categoria categoria; 
 
-    public Produto(int id, String nome, double preco, boolean disponivel) {
+    public Produto(int id, String nome, double preco, boolean disponivel, Categoria categoria) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.disponivel = disponivel;
+        this.categoria = categoria;
     }
 
     // Getters e Setters
@@ -46,6 +48,14 @@ public class Produto {
         this.disponivel = disponivel;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -53,6 +63,7 @@ public class Produto {
                 ", nome='" + nome + '\'' +
                 ", preco=" + preco +
                 ", disponivel=" + disponivel +
+                ", categoria=" + categoria +
                 '}';
     }
 }

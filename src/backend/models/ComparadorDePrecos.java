@@ -32,11 +32,30 @@ public class ComparadorDePrecos {
                 if (produto.isDisponivel()) {
                     comparacao.append("Produto: ").append(produto.getNome())
                             .append(" - Preço: ").append(produto.getPreco())
+                            .append(" - Categoria: ").append(produto.getCategoria())
                             .append("\n");
                 }
             }
             comparacao.append("\n");
         }
         return comparacao.toString();
+    }
+
+    // Nova funcionalidade: Filtrar e encontrar o menor preço de produtos por categoria
+    public static Mercado encontrarMelhorPrecoPorCategoria(Categoria categoria, List<Mercado> mercados) {
+        Mercado mercadoComMenorPreco = null;
+        double menorPreco = Double.MAX_VALUE;
+
+        for (Mercado mercado : mercados) {
+            for (Produto produto : mercado.listarProdutos()) {
+                if (produto.getCategoria() == categoria && produto.isDisponivel()) {
+                    if (produto.getPreco() < menorPreco) {
+                        menorPreco = produto.getPreco();
+                        mercadoComMenorPreco = mercado;
+                    }
+                }
+            }
+        }
+        return mercadoComMenorPreco;
     }
 }

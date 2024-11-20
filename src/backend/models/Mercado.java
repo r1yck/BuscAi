@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mercado {
+
     private int id;
     private String nome;
     private String localizacao;
@@ -58,13 +59,24 @@ public class Mercado {
         return new ArrayList<>(produtos);
     }
 
+    // Método para listar produtos por categoria
+    public List<Produto> listarProdutosPorCategoria(Categoria categoria) {
+        List<Produto> produtosPorCategoria = new ArrayList<>();
+        for (Produto produto : produtos) {
+            if (produto.getCategoria() == categoria) {
+                produtosPorCategoria.add(produto);
+            }
+        }
+        return produtosPorCategoria;
+    }
+
     @Override
     public String toString() {
-        return "Mercado{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", localizacao='" + localizacao + '\'' +
-                ", produtos=" + produtos +
-                '}';
+        return "Mercado{"
+                + "id=" + id
+                + ", nome='" + nome + '\''
+                + ", localizacao='" + localizacao + '\''
+                + ", produtos=" + produtos
+                + '}';
     }
 }

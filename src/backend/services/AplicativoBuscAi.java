@@ -1,5 +1,6 @@
 package backend.services;
 
+import backend.models.Categoria;
 import backend.models.ComparadorDePrecos;
 import backend.models.Mercado;
 import backend.models.Produto;
@@ -20,13 +21,11 @@ public class AplicativoBuscAi {
     // Método para iniciar o aplicativo
     public void iniciar() {
         System.out.println("Iniciando " + nome + " versão " + versao);
-        // Lógica adicional para iniciar o aplicativo
     }
 
     // Método para fechar o aplicativo
     public void fechar() {
         System.out.println("Fechando " + nome);
-        // Lógica adicional para fechar o aplicativo
     }
 
     // Adiciona um mercado ao aplicativo
@@ -34,20 +33,34 @@ public class AplicativoBuscAi {
         mercados.add(mercado);
     }
 
-    // Exibe os produtos de todos os mercados
+    // Exibe os produtos de todos os mercados que estão disponíveis
     public void listarProdutosDisponiveis() {
         if (mercados.isEmpty()) {
             System.out.println("Nenhum mercado cadastrado.");
             return;
         }
-
         System.out.println("Produtos disponíveis em todos os mercados:");
         for (Mercado mercado : mercados) {
             System.out.println("Mercado: " + mercado.getNome());
-            for (Produto produto : mercado.listarProdutos()) {
-                if (produto.isDisponivel()) {
-                    System.out.println("Produto: " + produto);
-                }
+            mercado.listarProdutos().stream()
+                .filter(Produto::isDisponivel)  // Filtra os produtos disponíveis
+                .forEach(produto -> System.out.println("Produto: " + produto));
+            System.out.println();
+        }
+    }
+
+    // Filtra produtos por categoria e disponibilidade e exibe os resultados
+    public void aplicarFiltroPorCategoria(Categoria categoria) {
+        if (mercados.isEmpty()) {
+            System.out.println("Nenhum mercado cadastrado.");
+            return;
+        }
+        System.out.println("Filtrando produtos da categoria: " + categoria);
+        for (Mercado mercado : mercados) {
+            List<Produto> produtosFiltrados = mercado.listarProdutosPorCategoria(categoria);
+            if (!produtosFiltrados.isEmpty()) {
+                System.out.println("Mercado: " + mercado.getNome());
+                produtosFiltrados.forEach(produto -> System.out.println("Produto: " + produto));
             }
             System.out.println();
         }
@@ -59,12 +72,11 @@ public class AplicativoBuscAi {
             System.out.println("Nenhum mercado cadastrado.");
             return;
         }
-
         System.out.println("Filtrando produtos disponíveis:");
         for (Mercado mercado : mercados) {
             List<Produto> produtosDisponiveis = FiltroDePreferencias.filtrarPorDisponibilidade(mercado.listarProdutos());
             System.out.println("Mercado: " + mercado.getNome() + " - Produtos disponíveis:");
-            produtosDisponiveis.forEach(System.out::println);
+            produtosDisponiveis.forEach(produto -> System.out.println("Produto: " + produto));
             System.out.println();
         }
     }
@@ -75,12 +87,11 @@ public class AplicativoBuscAi {
             System.out.println("Nenhum mercado cadastrado.");
             return;
         }
-
         System.out.println("Filtrando produtos com preço máximo de R$" + precoMaximo + ":");
         for (Mercado mercado : mercados) {
             List<Produto> produtosFiltrados = FiltroDePreferencias.filtrarPorPrecoMaximo(mercado.listarProdutos(), precoMaximo);
             System.out.println("Mercado: " + mercado.getNome() + " - Produtos abaixo de R$" + precoMaximo + ":");
-            produtosFiltrados.forEach(System.out::println);
+            produtosFiltrados.forEach(produto -> System.out.println("Produto: " + produto));
             System.out.println();
         }
     }
@@ -91,7 +102,6 @@ public class AplicativoBuscAi {
             System.out.println("Nenhum mercado cadastrado.");
             return;
         }
-
         Mercado melhorMercado = ComparadorDePrecos.encontrarMelhorPreco(nomeProduto, mercados);
         if (melhorMercado != null) {
             System.out.println("O menor preço para '" + nomeProduto + "' é no mercado " + melhorMercado.getNome());

@@ -63,7 +63,7 @@ public class Mercado {
     public List<Produto> listarProdutosPorCategoria(Categoria categoria) {
         List<Produto> produtosPorCategoria = new ArrayList<>();
         for (Produto produto : produtos) {
-            if (produto.getCategoria() == categoria) {
+            if (produto.getCategoria() == categoria) {  // Safe comparison for enums
                 produtosPorCategoria.add(produto);
             }
         }
@@ -72,11 +72,11 @@ public class Mercado {
 
     @Override
     public String toString() {
-        return "Mercado{"
-                + "id=" + id
-                + ", nome='" + nome + '\''
-                + ", localizacao='" + localizacao + '\''
-                + ", produtos=" + produtos
-                + '}';
+        return "Mercado{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", localizacao='" + localizacao + '\'' +
+                ", produtos=" + produtos +
+                '}';
     }
 }

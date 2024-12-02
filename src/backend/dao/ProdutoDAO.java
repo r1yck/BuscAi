@@ -2,6 +2,7 @@ package backend.dao;
 
 import backend.models.Produto;
 import backend.models.Categoria;
+import backend.models.Mercado;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,31 +17,23 @@ public class ProdutoDAO {
         this.conexao = conexao;
     }
 
-    // Método para salvar um novo produto no banco de dados
+    // Método para salvar o produto
     public void salvar(Produto produto) throws SQLException {
         Connection conn = conexao.conectar();
-        String sql = "INSERT INTO produto (nome, preco, disponivel, categoria) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco, disponivel, categoria, mercado_id) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, produto.getNome());
             stmt.setDouble(2, produto.getPreco());
             stmt.setBoolean(3, produto.isDisponivel());
-            stmt.setString(4, produto.getCategoria().name()); // Salva a categoria como String
-            stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
-        }
-    }
+            stmt.setString(4, produto.getCategoria().name()); // Categoria como String
 
-    // Método para atualizar um produto existente
-    public void atualizar(Produto produto) throws SQLException {
-        Connection conn = conexao.conectar();
-        String sql = "UPDATE produto SET nome = ?, preco = ?, disponivel = ?, categoria = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
-            stmt.setBoolean(3, produto.isDisponivel());
-            stmt.setString(4, produto.getCategoria().name()); // Atualiza a categoria
-            stmt.setInt(5, produto.getId());
+            // Verifica se o Mercado é nulo e ajusta a query
+            if (produto.getMercado() != null) {
+                stmt.setInt(5, produto.getMercado().getId());  // Mercado associado ao produto
+            } else {
+                stmt.setNull(5, java.sql.Types.INTEGER);  // Caso não haja mercado associado
+            }
+            
             stmt.executeUpdate();
         } finally {
             conexao.desconectar(conn);
@@ -51,16 +44,25 @@ public class ProdutoDAO {
     public List<Produto> buscarTodos() throws SQLException {
         Connection conn = conexao.conectar();
         List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT * FROM produto";
+        String sql = "SELECT p.id, p.nome, p.preco, p.disponivel, p.categoria, p.mercado_id, m.nome AS mercado_nome " +
+                     "FROM produto p LEFT JOIN mercado m ON p.mercado_id = m.id";
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
+                // Ajuste na construção do Mercado: Adicionando um valor padrão para localizacao
+                Mercado mercado = new Mercado(
+                    rs.getInt("mercado_id"), 
+                    rs.getString("mercado_nome"), 
+                    rs.getString("mercado_nome") != null ? rs.getString("mercado_nome") : "Localizacao desconhecida" 
+                );  // Ajuste para permitir valores padrão de localização
+
                 Produto produto = new Produto(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getDouble("preco"),
                     rs.getBoolean("disponivel"),
-                    Categoria.valueOf(rs.getString("categoria")) // Converte de String para Categoria
+                    Categoria.valueOf(rs.getString("categoria")),
+                    mercado // Associando produto ao mercado
                 );
                 produtos.add(produto);
             }

@@ -5,14 +5,16 @@ public class Produto {
     private String nome;
     private double preco;
     private boolean disponivel;
-    private Categoria categoria; 
+    private Categoria categoria;
+    private Mercado mercado; // Atributo Mercado
 
-    public Produto(int id, String nome, double preco, boolean disponivel, Categoria categoria) {
+    public Produto(int id, String nome, double preco, boolean disponivel, Categoria categoria, Mercado mercado) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.disponivel = disponivel;
         this.categoria = categoria;
+        this.mercado = mercado; // Inicializando mercado
     }
 
     // Getters e Setters
@@ -56,6 +58,15 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    // Novo método getMercado e setMercado
+    public Mercado getMercado() {
+        return mercado;
+    }
+
+    public void setMercado(Mercado mercado) {
+        this.mercado = mercado;
+    }
+
     @Override
     public String toString() {
         return "Produto{" +
@@ -63,7 +74,8 @@ public class Produto {
                 ", nome='" + nome + '\'' +
                 ", preco=" + preco +
                 ", disponivel=" + disponivel +
-                ", categoria=" + categoria +
+                ", categoria=" + categoria.name() + // Exibe o nome legível da categoria
+                ", mercado=" + (mercado != null ? mercado.getNome() : "Sem mercado") + // Exibe nome do mercado
                 '}';
     }
 }

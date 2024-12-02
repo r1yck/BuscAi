@@ -10,8 +10,8 @@ public class Avaliacao {
     public Avaliacao(int id, int nota, String comentario, String autor) {
         this.id = id;
         setNota(nota); // Usando o setter para validar a nota
-        this.comentario = comentario;
-        this.autor = autor;
+        setComentario(comentario); // Definindo o comentário
+        setAutor(autor); // Definindo o autor
     }
 
     // Getters e Setters
@@ -40,7 +40,12 @@ public class Avaliacao {
     }
 
     public void setComentario(String comentario) {
-        this.comentario = comentario;
+        // Se o comentário for nulo ou vazio, define um valor padrão
+        if (comentario == null || comentario.trim().isEmpty()) {
+            this.comentario = "Sem comentários adicionais.";
+        } else {
+            this.comentario = comentario;
+        }
     }
 
     public String getAutor() {
@@ -48,6 +53,9 @@ public class Avaliacao {
     }
 
     public void setAutor(String autor) {
+        if (autor == null || autor.trim().isEmpty()) {
+            throw new IllegalArgumentException("O autor não pode ser vazio.");
+        }
         this.autor = autor;
     }
 

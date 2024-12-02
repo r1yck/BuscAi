@@ -15,39 +15,13 @@ public class MercadoDAO {
         this.conexao = conexao;
     }
 
-    // Método para salvar um novo mercado no banco de dados
+    // Método para salvar o mercado
     public void salvar(Mercado mercado) throws SQLException {
         Connection conn = conexao.conectar();
         String sql = "INSERT INTO mercado (nome, localizacao) VALUES (?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, mercado.getNome());
             stmt.setString(2, mercado.getLocalizacao());
-            stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
-        }
-    }
-
-    // Método para atualizar um mercado existente
-    public void atualizar(Mercado mercado) throws SQLException {
-        Connection conn = conexao.conectar();
-        String sql = "UPDATE mercado SET nome = ?, localizacao = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, mercado.getNome());
-            stmt.setString(2, mercado.getLocalizacao());
-            stmt.setInt(3, mercado.getId());
-            stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
-        }
-    }
-
-    // Método para deletar um mercado pelo ID
-    public void deletar(int id) throws SQLException {
-        Connection conn = conexao.conectar();
-        String sql = "DELETE FROM mercado WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, id);
             stmt.executeUpdate();
         } finally {
             conexao.desconectar(conn);

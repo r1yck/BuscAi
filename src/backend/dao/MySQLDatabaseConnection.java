@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLDatabaseConnection implements IDatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/buscai_db";
-    private static final String USER = "seu_usuario"; // Substituir pelo seu usuário do MySQL
-    private static final String PASSWORD = "sua_senha"; // Substituir pela sua senha do MySQL
+    private static final String URL = "jdbc:mysql://localhost:3306/buscai_db";  // Certifique-se de ter esse banco
+    private static final String USER = "root"; // Substitua pelo seu usuário do MySQL
+    private static final String PASSWORD = "@Henri0202"; // Substitua pela sua senha do MySQL
 
     @Override
     public Connection conectar() throws SQLException {

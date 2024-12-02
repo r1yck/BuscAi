@@ -1,28 +1,24 @@
+-- Criação do banco de dados
 CREATE DATABASE IF NOT EXISTS buscai_db;
+
+-- Seleciona o banco de dados
 USE buscai_db;
 
--- Tabela de mercados com mais detalhes
-CREATE TABLE IF NOT EXISTS mercado (
+-- Criação da tabela Mercado
+CREATE TABLE mercado (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    localizacao VARCHAR(255) NOT NULL,
-    telefone VARCHAR(20),  
-    email VARCHAR(255)     
+    localizacao VARCHAR(255) NOT NULL
 );
 
--- Tabela de produtos com mais informações
-CREATE TABLE IF NOT EXISTS produto (
+-- Criação da tabela Produto com a relação com Mercado
+CREATE TABLE produto (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     preco DECIMAL(10, 2) NOT NULL,
-    disponivel BOOLEAN DEFAULT TRUE,
-    mercado_id INT,
-    categoria VARCHAR(255), 
-    marca VARCHAR(255),     
-    FOREIGN KEY (mercado_id) REFERENCES mercado(id) ON DELETE CASCADE
+    disponivel BOOLEAN NOT NULL,
+    categoria VARCHAR(50) NOT NULL,   -- Categoria como uma string
+    mercado_id INT,                   -- Relacionamento com Mercado
+    FOREIGN KEY (mercado_id) REFERENCES mercado(id)  -- Chave estrangeira
 );
 
--- Criando índices para otimizar consultas
-CREATE INDEX idx_produto_nome ON produto(nome);
-CREATE INDEX idx_produto_mercado_id ON produto(mercado_id);
-CREATE INDEX idx_mercado_nome ON mercado(nome);

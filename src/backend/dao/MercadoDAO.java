@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MercadoDAO {
+
     private final IDatabaseConnection conexao;
 
     public MercadoDAO(IDatabaseConnection conexao) {
@@ -33,8 +34,7 @@ public class MercadoDAO {
         Connection conn = conexao.conectar();
         List<Mercado> mercados = new ArrayList<>();
         String sql = "SELECT * FROM mercado";
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 Mercado mercado = new Mercado(rs.getInt("id"), rs.getString("nome"), rs.getString("localizacao"));
                 mercados.add(mercado);
@@ -44,4 +44,31 @@ public class MercadoDAO {
         }
         return mercados;
     }
+
+    // Método para atualizar um mercado
+    public void atualizar(Mercado mercado) throws SQLException {
+        Connection conn = conexao.conectar();
+        String sql = "UPDATE mercado SET nome = ?, localizacao = ? WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, mercado.getNome());
+            stmt.setString(2, mercado.getLocalizacao());
+            stmt.setInt(3, mercado.getId());
+            stmt.executeUpdate();
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+
+// Método para deletar um mercado
+    public void deletar(int mercadoId) throws SQLException {
+        Connection conn = conexao.conectar();
+        String sql = "DELETE FROM mercado WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, mercadoId);
+            stmt.executeUpdate();
+        } finally {
+            conexao.desconectar(conn);
+        }
+    }
+
 }

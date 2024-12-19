@@ -6,6 +6,7 @@ import backend.models.Mercado;
 import backend.models.Produto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AplicativoBuscAi {
     private String nome;
@@ -31,6 +32,26 @@ public class AplicativoBuscAi {
     // Adiciona um mercado ao aplicativo
     public void adicionarMercado(Mercado mercado) {
         mercados.add(mercado);
+    }
+
+    // Exibe todos os mercados cadastrados
+    public List<Mercado> listarMercados() {
+        return mercados;
+    }
+
+    // Busca um mercado por nome
+    public Mercado buscarMercadoPorNome(String nome) {
+        for (Mercado mercado : mercados) {
+            if (mercado.getNome().equalsIgnoreCase(nome)) {
+                return mercado;
+            }
+        }
+        return null; // Retorna null caso o mercado não seja encontrado
+    }
+
+    // Deleta um mercado
+    public void deletarMercado(Mercado mercado) {
+        mercados.remove(mercado);
     }
 
     // Exibe os produtos de todos os mercados que estão disponíveis

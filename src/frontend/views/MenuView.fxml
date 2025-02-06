@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: FFF;" stylesheets="@menuview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controller.MenuController">
+   <children>
+      <VBox alignment="CENTER" layoutX="-8.0" layoutY="-7.0" prefHeight="380.0" prefWidth="1136.0">
+         <children>
+            <ImageView fitHeight="351.0" fitWidth="398.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/buscAi%20logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <HBox alignment="BASELINE_CENTER" layoutY="374.0" prefHeight="225.0" prefWidth="550.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#switchToScene2" prefHeight="70.0" prefWidth="162.0" stylesheets="@menuview.css" text="Listar Mercados">
+               <font>
+                  <Font size="13.0" />
+               </font></Button>
+         </children>
+      </HBox>
+      <HBox alignment="BASELINE_CENTER" layoutX="548.0" layoutY="378.0" prefHeight="225.0" prefWidth="554.0">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="162.0" text="Sou Comerciante">
+               <font>
+                  <Font size="13.0" />
+               </font></Button>
+         </children>
+      </HBox>
+   </children>
+</Pane>

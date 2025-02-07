@@ -29,7 +29,7 @@
       </HBox>
       <HBox alignment="BASELINE_CENTER" layoutX="548.0" layoutY="378.0" prefHeight="225.0" prefWidth="554.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="162.0" text="Sou Comerciante">
+            <Button mnemonicParsing="false" onAction="#switchToScene1" prefHeight="70.0" prefWidth="162.0" text="Sou Comerciante">
                <font>
                   <Font size="13.0" />
                </font></Button>

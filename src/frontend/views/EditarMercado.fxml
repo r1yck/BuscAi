@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="69.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="54.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/buscAi%20logo.png" />
+               </image>
+            </ImageView>
+            <Button mnemonicParsing="false" style="-fx-background-color: FFF;" text="Voltar">
+               <graphic>
+                  <ImageView fitHeight="16.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Arrow%20left-circle.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Line endX="485.29290771484375" endY="-1.6568340063095093" startX="1055.25244140625" startY="-1.6568306684494019" stroke="#17ca03">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Line>
+         </children>
+      </VBox>
+      <VBox layoutY="98.0" prefHeight="125.0" prefWidth="600.0">
+         <children>
+            <Label text="Nome do Mercado:">
+               <VBox.margin>
+                  <Insets left="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField style="-fx-background-color: FFF; -fx-border-color: gray;">
+               <VBox.margin>
+                  <Insets left="5.0" right="25.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Localização do Mercado:">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <TextField style="-fx-background-color: FFF; -fx-border-color: grey;">
+               <VBox.margin>
+                  <Insets left="5.0" right="25.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <HBox alignment="TOP_CENTER" layoutX="2.0" layoutY="238.0" prefHeight="112.0" prefWidth="593.0" style="-fx-spacing: 70;">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Excluir Mercado" />
+            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Adicionar Mercado" />
+            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Editar Mercado" />
+         </children>
+      </HBox>
+   </children>
+</Pane>

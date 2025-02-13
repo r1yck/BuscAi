@@ -12,8 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controller.EditarMercadoController">
    <children>
       <VBox prefHeight="69.0" prefWidth="600.0">
          <children>
@@ -68,7 +67,7 @@
       <HBox alignment="TOP_CENTER" layoutX="2.0" layoutY="238.0" prefHeight="112.0" prefWidth="593.0" style="-fx-spacing: 70;">
          <children>
             <Button mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Excluir Mercado" />
-            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Adicionar Mercado" />
+            <Button mnemonicParsing="false" onAction="#vaPraCadastrarMercado" style="-fx-background-color: #7ED957;" text="Adicionar Mercado" />
             <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Editar Mercado" />
          </children>
       </HBox>

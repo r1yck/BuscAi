@@ -19,7 +19,7 @@ public class MenuController {
     private Parent root;
 
     public void switchToScene1(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/views/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/Login.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -27,7 +27,7 @@ public class MenuController {
     }
 
     public void switchToScene2(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/views/ListaMercadosView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/ListaMercadosView.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

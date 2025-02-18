@@ -23,7 +23,15 @@ public class LoginController {
     private Parent root;
 
     public void vaPraMenuMercado(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("frontend/views/MenuMercado.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/MenuMercado.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+    public void voltarMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/MenuView.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

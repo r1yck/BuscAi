@@ -1,103 +1,86 @@
 package backend.dao;
 
 import backend.models.Produto;
-import backend.models.Categoria;
-import backend.models.Mercado;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO {
 
-    private final IDatabaseConnection conexao;
-
-    public ProdutoDAO(IDatabaseConnection conexao) {
-        this.conexao = conexao;
+    public ProdutoDAO(Connection conexao) {
     }
+    public void adicionarProduto(Produto produto) {
+    String sql = "INSERT INTO produto (nome, preco, categoria, disponibilidade, mercado_id) VALUES (?, ?, ?, ?, ?)";
+    try (Connection conexao = ConexaoMySQL.getConexao();
+         PreparedStatement stmt = conexao.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {  
+        stmt.setString(1, produto.getNome());
+        stmt.setFloat(2, produto.getPreco());
+        stmt.setString(3, produto.getCategoria());
+        stmt.setBoolean(4, produto.isDisponibilidade());
+        stmt.setInt(5, produto.getMercadoId());
+        
+        int rowsAffected = stmt.executeUpdate();
 
-    // Método para salvar o produto
-    public void salvar(Produto produto) throws SQLException {
-        Connection conn = conexao.conectar();
-        String sql = "INSERT INTO produto (nome, preco, disponivel, categoria, mercado_id) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
-            stmt.setBoolean(3, produto.isDisponivel());
-            stmt.setString(4, produto.getCategoria().name()); // Categoria como String
-
-            // Verifica se o Mercado é nulo e ajusta a query
-            if (produto.getMercado() != null) {
-                stmt.setInt(5, produto.getMercado().getId());  // Mercado associado ao produto
-            } else {
-                stmt.setNull(5, java.sql.Types.INTEGER);  // Caso não haja mercado associado
+        if (rowsAffected > 0) {
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    produto.setId(generatedKeys.getInt(1));  
+                }
             }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 
+
+    public void atualizarProduto(int id, String nome, float preco, String categoria, boolean disponibilidade, int mercadoId) {
+        String sql = "UPDATE produto SET nome = ?, preco = ?, categoria = ?, disponibilidade = ?, mercado_id = ? WHERE id = ?";
+        try (Connection conexao = ConexaoMySQL.getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, nome);
+            stmt.setFloat(2, preco);
+            stmt.setString(3, categoria);
+            stmt.setBoolean(4, disponibilidade);
+            stmt.setInt(5, mercadoId);
+            stmt.setInt(6, id);
             stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
-    // Método para buscar todos os produtos
-    public List<Produto> buscarTodos() throws SQLException {
-        Connection conn = conexao.conectar();
+    public List<Produto> listarProdutos() {
         List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT p.id, p.nome, p.preco, p.disponivel, p.categoria, p.mercado_id, m.nome AS mercado_nome "
-                + "FROM produto p LEFT JOIN mercado m ON p.mercado_id = m.id";
-        try (PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        String sql = "SELECT * FROM produto";
+        try (Connection conexao = ConexaoMySQL.getConexao();
+             Statement stmt = conexao.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                // Ajuste na construção do Mercado: Adicionando um valor padrão para localizacao
-                Mercado mercado = new Mercado(
-                        rs.getInt("mercado_id"),
-                        rs.getString("mercado_nome"),
-                        rs.getString("mercado_nome") != null ? rs.getString("mercado_nome") : "Localizacao desconhecida"
-                );  // Ajuste para permitir valores padrão de localização
-
                 Produto produto = new Produto(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco"),
-                        rs.getBoolean("disponivel"),
-                        Categoria.valueOf(rs.getString("categoria")),
-                        mercado // Associando produto ao mercado
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getFloat("preco"),
+                    rs.getString("categoria"),
+                    rs.getBoolean("disponibilidade"),
+                    rs.getInt("mercado_id")
                 );
                 produtos.add(produto);
             }
-        } finally {
-            conexao.desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return produtos;
     }
 
-    // Método para atualizar um produto
-    public void atualizar(Produto produto) throws SQLException {
-        Connection conn = conexao.conectar();
-        String sql = "UPDATE produto SET nome = ?, preco = ?, disponivel = ?, categoria = ? WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
-            stmt.setBoolean(3, produto.isDisponivel());
-            stmt.setString(4, produto.getCategoria().name());
-            stmt.setInt(5, produto.getId());
-            stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
-        }
-    }
-
-// Método para deletar um produto
-    public void deletar(int produtoId) throws SQLException {
-        Connection conn = conexao.conectar();
+    public void removerProduto(int id) {
         String sql = "DELETE FROM produto WHERE id = ?";
-        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, produtoId);
+        try (Connection conexao = ConexaoMySQL.getConexao();
+             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, id);
             stmt.executeUpdate();
-        } finally {
-            conexao.desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-
 }

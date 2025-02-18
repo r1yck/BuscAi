@@ -1,23 +1,23 @@
 package backend.models;
 
 public class Produto {
+
     private int id;
     private String nome;
-    private double preco;
-    private boolean disponivel;
-    private Categoria categoria;
-    private Mercado mercado; // Atributo Mercado
+    private float preco;
+    private String categoria;
+    private boolean disponibilidade;
+    private int mercadoId; 
 
-    public Produto(int id, String nome, double preco, boolean disponivel, Categoria categoria, Mercado mercado) {
+    public Produto(int id, String nome, float preco, String categoria, boolean disponibilidade, int mercadoId) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
-        this.disponivel = disponivel;
         this.categoria = categoria;
-        this.mercado = mercado; // Inicializando mercado
+        this.disponibilidade = disponibilidade;
+        this.mercadoId = mercadoId;
     }
 
-    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -34,48 +34,41 @@ public class Produto {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public float getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(float preco) {
         this.preco = preco;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    // Novo método getMercado e setMercado
-    public Mercado getMercado() {
-        return mercado;
+    public boolean isDisponibilidade() {
+        return disponibilidade;
     }
 
-    public void setMercado(Mercado mercado) {
-        this.mercado = mercado;
+    public void setDisponibilidade(boolean disponibilidade) {
+        this.disponibilidade = disponibilidade;
+    }
+
+    // Getter e setter para o mercadoId
+    public int getMercadoId() {
+        return mercadoId;
+    }
+
+    public void setMercadoId(int mercadoId) {
+        this.mercadoId = mercadoId;
     }
 
     @Override
     public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", preco=" + preco +
-                ", disponivel=" + disponivel +
-                ", categoria=" + categoria.name() + // Exibe o nome legível da categoria
-                ", mercado=" + (mercado != null ? mercado.getNome() : "Sem mercado") + // Exibe nome do mercado
-                '}';
+        return "Produto{id=" + id + ", nome='" + nome + "', preco=" + preco + ", categoria='" + categoria + "', disponibilidade=" + disponibilidade + ", mercadoId=" + mercadoId + "}";
     }
 }

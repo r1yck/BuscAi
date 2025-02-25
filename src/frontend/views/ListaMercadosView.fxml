@@ -9,8 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: 000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: 000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controller.ListaMercadosController">
    <children>
       <HBox layoutY="-7.0" prefHeight="108.0" prefWidth="1104.0">
          <children>
@@ -23,7 +22,7 @@
       </HBox>
       <HBox alignment="BASELINE_LEFT" layoutX="-4.0" layoutY="85.0" prefHeight="54.0" prefWidth="1106.0">
          <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#voltaMenu" prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>

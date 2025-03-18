@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -9,8 +10,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: 000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: 000;"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="frontend.controller.ListaMercadosController">
+    
    <children>
       <HBox layoutY="-7.0" prefHeight="108.0" prefWidth="1104.0">
          <children>
@@ -21,9 +25,11 @@
             </ImageView>
          </children>
       </HBox>
+
       <HBox alignment="BASELINE_LEFT" layoutX="-4.0" layoutY="85.0" prefHeight="54.0" prefWidth="1106.0">
          <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#voltaMenu"
+                    prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
                <graphic>
                   <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,6 +46,12 @@
             </Button>
          </children>
       </HBox>
-      <Line endX="822.6666259765625" endY="-144.99998474121094" layoutX="248.0" layoutY="284.0" startX="-218.66664123535156" startY="-144.99998474121094" stroke="#17ca03" />
+
+      <!-- ADICIONADO: ListView para exibir os mercados -->
+      <ListView fx:id="listaMercados" layoutX="50.0" layoutY="150.0" prefWidth="1000.0"
+                prefHeight="400.0" onMouseClicked="#abrirProdutosMercado"/>
+
+      <Line endX="822.6666259765625" endY="-144.99998474121094" layoutX="248.0" layoutY="284.0"
+            startX="-218.66664123535156" startY="-144.99998474121094" stroke="#17ca03"/>
    </children>
 </Pane>

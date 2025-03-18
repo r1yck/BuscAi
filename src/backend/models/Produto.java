@@ -9,7 +9,7 @@ public class Produto {
     private boolean disponibilidade;
     private int mercadoId; 
 
-    public Produto(int id, String nome, float preco, String categoria, boolean disponibilidade, int mercadoId) {
+    public Produto(String nome) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;

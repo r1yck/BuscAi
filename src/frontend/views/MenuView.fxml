@@ -21,18 +21,22 @@
       </VBox>
       <HBox alignment="BASELINE_CENTER" layoutY="374.0" prefHeight="225.0" prefWidth="550.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToScene2" prefHeight="70.0" prefWidth="162.0" stylesheets="@menuview.css" text="Listar Mercados">
+            <!-- Alterado o onAction para abrir a lista de mercados -->
+            <Button mnemonicParsing="false" onAction="#abrirListaMercados" prefHeight="70.0" prefWidth="162.0" stylesheets="@menuview.css" text="Listar Mercados">
                <font>
                   <Font size="13.0" />
-               </font></Button>
+               </font>
+            </Button>
          </children>
       </HBox>
       <HBox alignment="BASELINE_CENTER" layoutX="548.0" layoutY="378.0" prefHeight="225.0" prefWidth="554.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#switchToScene1" prefHeight="70.0" prefWidth="162.0" text="Sou Comerciante">
+            <!-- Alterado o onAction para abrir o modal de login -->
+            <Button mnemonicParsing="false" onAction="#abrirLogin" prefHeight="70.0" prefWidth="162.0" text="Sou Comerciante">
                <font>
                   <Font size="13.0" />
-               </font></Button>
+               </font>
+            </Button>
          </children>
       </HBox>
    </children>

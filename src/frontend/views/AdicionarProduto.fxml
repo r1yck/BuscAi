@@ -14,8 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: line;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: line;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controller.AdicionarProdutoController">
    <children>
       <VBox prefHeight="73.0" prefWidth="600.0">
          <children>
@@ -24,7 +23,7 @@
                   <Image url="@../images/buscAi%20logo.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" prefHeight="9.0" prefWidth="83.0" style="-fx-background-color: FFF;" text="Voltar">
+            <Button mnemonicParsing="false" prefHeight="9.0" prefWidth="83.0" style="-fx-background-color: FFF;" text="Voltar" onAction="#voltar">
                <graphic>
                   <ImageView fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +45,7 @@
                   <Insets left="5.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField style="-fx-border-color: grey;">
+            <TextField fx:id="nomeProdutoField" style="-fx-border-color: grey;">
                <VBox.margin>
                   <Insets left="5.0" right="25.0" top="5.0" />
                </VBox.margin>
@@ -56,12 +55,12 @@
                   <Insets left="5.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TextField style="-fx-border-color: grey;">
+            <TextField fx:id="precoProdutoField" style="-fx-border-color: grey;">
                <VBox.margin>
                   <Insets left="5.0" right="25.0" top="5.0" />
                </VBox.margin>
             </TextField>
-            <CheckBox mnemonicParsing="false" style="-fx-background-color: FFF;" text="Produto Disponível">
+            <CheckBox fx:id="disponibilidadeProdutoCheckBox" mnemonicParsing="false" style="-fx-background-color: FFF;" text="Produto Disponível">
                <VBox.margin>
                   <Insets left="5.0" top="15.0" />
                </VBox.margin>
@@ -71,7 +70,7 @@
                   <Insets left="5.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <ChoiceBox prefHeight="25.0" prefWidth="569.0" style="-fx-background-color: FFF; -fx-border-color: grey;">
+            <ChoiceBox fx:id="categoriaProdutoChoiceBox" prefHeight="25.0" prefWidth="569.0" style="-fx-background-color: FFF; -fx-border-color: grey;">
                <VBox.margin>
                   <Insets left="5.0" top="5.0" />
                </VBox.margin>
@@ -80,9 +79,8 @@
       </VBox>
       <HBox alignment="TOP_CENTER" layoutX="9.0" layoutY="340.0" prefHeight="52.0" prefWidth="570.0" style="-fx-spacing: 70;">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Adicionar Produto" />
-            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Salvar Mercado e Produtos" />
-            <Button mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Cancelar Cadastro" />
+            <Button mnemonicParsing="false" style="-fx-background-color: #7ED957;" text="Adicionar Produto" onAction="#adicionarProduto"/>
+            <Button mnemonicParsing="false" style="-fx-background-color: #FF0000;" text="Finalizar Cadastro" onAction="#finalizarCadastro"/>
          </children>
       </HBox>
    </children>

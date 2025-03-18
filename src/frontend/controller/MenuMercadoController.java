@@ -17,25 +17,26 @@ import javafx.stage.Stage;
  *
  * @author mafxr
  */
-public class MenuMercadoController  {
-    
+public class MenuMercadoController {
+
     private Stage stage;
     private Scene scene;
     private Parent root;
 
     public void vaPraCadastrarMercado(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/AdicionaMercado.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
-    
+
     public void vaPraEditarMercado(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/EditarMercado.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
 }

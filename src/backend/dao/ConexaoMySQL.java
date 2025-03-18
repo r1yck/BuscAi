@@ -11,11 +11,11 @@ public class ConexaoMySQL {
 
     public static Connection getConexao() throws SQLException {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            // O driver é carregado automaticamente, portanto, pode ser removido
             return DriverManager.getConnection(URL, USUARIO, SENHA);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Driver JDBC não encontrado");
+            throw new SQLException("Erro ao conectar ao banco de dados: " + e.getMessage());
         }
     }
 

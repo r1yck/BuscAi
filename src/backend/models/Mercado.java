@@ -41,3 +41,4 @@ public class Mercado {
         return "Mercado{id=" + id + ", nome='" + nome + "', localizacao='" + localizacao + "'}";
     }
 }
+

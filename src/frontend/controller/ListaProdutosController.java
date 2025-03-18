@@ -4,9 +4,12 @@
  */
 package frontend.controller;
 
+import backend.models.Mercado;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /**
  * FXML Controller class
@@ -15,12 +18,24 @@ import javafx.fxml.Initializable;
  */
 public class ListaProdutosController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Label nomeMercadoLabel;
+
+    private Mercado mercadoSelecionado;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        // Inicialização da interface, se necessário
+    }
+
+    public void setMercadoSelecionado(Mercado mercado) {
+        this.mercadoSelecionado = mercado;
+        atualizarInterface();
+    }
+
+    private void atualizarInterface() {
+        if (mercadoSelecionado != null) {
+            nomeMercadoLabel.setText(mercadoSelecionado.getNome());
+        }
+    }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/models/Mercado.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/EditarMercado.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/models/Usuario.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/MenuView.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/ListaProdutos.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/dao/MercadoDAO.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/ListaProdutosController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/AdicionaMercadoController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/AdicionarProduto.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/models/Produto.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/ListaMercadosController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/ListaMercadosView.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/MenuController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/Main.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/MenuMercadoController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/dao/ConexaoMySQL.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/CompararPrecoController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/LoginController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/AdicionarProdutoController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/AdicionaMercado.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/dao/ProdutoDAO.java</file>
+        </group>
+    </open-files>
+</project-private>

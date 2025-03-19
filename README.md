@@ -1,6 +1,8 @@
 # BuscAi
 
-<img src="buscAi_logo_-_x.png" alt="Logo do BuscAi" width="300"/>
+<div style="text-align: center;">
+    <img src="buscAi_logo_-_x.png" alt="Logo do BuscAi" width="300"/>
+</div>
 
 **BuscAi** é uma plataforma digital para busca e comparação de preços de produtos em diferentes supermercados, projetada para ajudar os usuários a encontrar as melhores ofertas de acordo com suas preferências e localização. A aplicação facilita o acesso a informações de preços e disponibilidade de produtos, promovendo uma experiência prática e intuitiva.
 

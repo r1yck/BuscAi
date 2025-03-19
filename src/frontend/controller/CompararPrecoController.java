@@ -9,14 +9,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.stage.Stage;
@@ -27,26 +29,25 @@ import javafx.scene.Scene;
 public class CompararPrecoController implements Initializable {
 
     @FXML
-    private Label nomeProdutoLabel; // Label para exibir o nome do produto
+    private Label nomeProdutoLabel;
     @FXML
-    private ListView<String> listaComparacaoView; // ListView para exibir os preços em diferentes mercados
+    private ListView<String> listaComparacaoView;
 
-    private Produto produtoSelecionado; // Produto que será comparado
-    private ProdutoDAO produtoDAO; // DAO para produtos
-    private MercadoDAO mercadoDAO; // DAO para mercados
-    private Connection conexao; // Conexão com o banco de dados
+    private Produto produtoSelecionado;
+    private ProdutoDAO produtoDAO;
+    private MercadoDAO mercadoDAO;
+    private Connection conexao;
+    private Mercado mercadoSelecionado; // Armazena o mercado selecionado
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Inicializa a lista de comparação
         listaComparacaoView.setItems(FXCollections.observableArrayList());
     }
 
-    // Método para garantir a conexão
     private Connection garantirConexao() {
         try {
             if (this.conexao == null || this.conexao.isClosed()) {
-                this.conexao = ConexaoMySQL.getConexao(); // Método para obter uma nova conexão
+                this.conexao = ConexaoMySQL.getConexao();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,57 +55,71 @@ public class CompararPrecoController implements Initializable {
         return this.conexao;
     }
 
-    // Método para definir o produto e a conexão
-    public void setProduto(String nomeProduto, Connection conexao) throws SQLException {
-        this.conexao = conexao; // Define a conexão
-        this.produtoDAO = new ProdutoDAO(garantirConexao()); // Usa a conexão garantida
+    public void setProduto(String nomeProduto, Connection conexao, Mercado mercado) throws SQLException {
+        this.conexao = conexao;
+        this.produtoDAO = new ProdutoDAO(garantirConexao());
         this.mercadoDAO = new MercadoDAO(garantirConexao());
-        
-        // Obtém o produto a partir do nome
-        List<Produto> produtos = produtoDAO.listarProdutosPorMercado(0); // Passa um ID de mercado que faz sentido ou um método para buscar pelo nome
-        for (Produto p : produtos) {
-            if (p.getNome().equals(nomeProduto)) {
-                this.produtoSelecionado = p; // Define o produto selecionado
-                break;
-            }
-        }
+        this.produtoSelecionado = produtoDAO.buscarProdutoPorNome(nomeProduto);
+        this.mercadoSelecionado = mercado; // Define o mercado selecionado
 
-        // Atualiza a interface com as informações do produto
         nomeProdutoLabel.setText(produtoSelecionado != null ? produtoSelecionado.getNome() : "Produto não encontrado");
-        listarPrecosNosMercados(); // Lista os preços em todos os mercados
+        listarPrecosNosMercados();
     }
 
     private void listarPrecosNosMercados() throws SQLException {
         if (produtoSelecionado != null) {
-            List<Mercado> mercados = mercadoDAO.listarMercados(); // Obtém a lista de mercados
-            ObservableList<String> precos = FXCollections.observableArrayList();
+            List<Mercado> mercados = mercadoDAO.listarMercados();
+            List<String> precos = new ArrayList<>();
 
             for (Mercado mercado : mercados) {
-                // Obtém o produto associado ao mercado
                 List<Produto> produtos = produtoDAO.listarProdutosPorMercado(mercado.getId());
+
                 for (Produto p : produtos) {
                     if (p.getNome().equals(produtoSelecionado.getNome())) {
-                        // Adiciona o preço do produto ao resultado da comparação
-                        precos.add(mercado.getNome() + ": R$" + p.getPreco() + " - " + (p.isDisponibilidade() ? "Disponível" : "Indisponível"));
+                        String precoFormatado = String.format(Locale.US, "%.2f", p.getPreco());
+                        String precoInfo = String.format("%s: R$%s - %s",
+                                mercado.getNome(), precoFormatado, (p.isDisponibilidade() ? "Disponível" : "Indisponível"));
+                        precos.add(precoInfo);
                     }
                 }
             }
 
-            // Atualiza a ListView com os preços encontrados
-            listaComparacaoView.setItems(precos);
+            precos.sort(Comparator.comparingDouble(s -> {
+                try {
+                    String[] partes = s.split("R\\$");
+                    if (partes.length > 1) {  // Verifica se há uma parte após "R$"
+                        return Double.parseDouble(partes[1].split(" - ")[0].replace(",", "."));
+                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+                return Double.MAX_VALUE; // Fallback para evitar erro
+            }));
+
+            listaComparacaoView.setItems(FXCollections.observableArrayList(precos));
         }
     }
 
     @FXML
-    public void voltar(ActionEvent event) throws IOException {
-        // Carrega a tela anterior (ListaProdutos.fxml ou outra tela relevante)
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontend/views/ListaProdutos.fxml"));
-        Parent root = loader.load();
+    private void voltar(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontend/views/ListaProdutos.fxml"));
+            Parent root = loader.load();
 
-        // Muda a cena para a tela anterior
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Lista de Produtos");
-        stage.show();
+            // Aqui você deve obter a referência do controlador de ListaProdutos
+            ListaProdutosController listaProdutosController = loader.getController();
+            
+            // Passar o mercado selecionado
+            if (mercadoSelecionado != null) {
+                listaProdutosController.setMercadoSelecionado(mercadoSelecionado, this.conexao);
+            }
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

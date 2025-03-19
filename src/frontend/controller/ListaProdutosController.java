@@ -139,9 +139,9 @@ public class ListaProdutosController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontend/views/CompararPreco.fxml"));
             Parent root = loader.load();
 
-            // Aqui você pode passar o nome do produto para a nova tela de comparação
+            // Aqui você pode passar o nome do produto e o mercado selecionado para a nova tela de comparação
             CompararPrecoController compararPrecosController = loader.getController();
-            compararPrecosController.setProduto(nomeProduto, this.conexao); // Passa a conexão correta
+            compararPrecosController.setProduto(nomeProduto, this.conexao, mercadoSelecionado); // Passa o mercado selecionado também
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));

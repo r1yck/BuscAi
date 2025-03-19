@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProdutoDAO {
+
     private final Connection conexao;
 
     public ProdutoDAO(Connection conexao) {
@@ -53,12 +54,12 @@ public class ProdutoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     produtos.add(new Produto(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getString("categoria"),
-                        rs.getBoolean("disponibilidade"),
-                        rs.getInt("mercado_id")
+                            rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getFloat("preco"),
+                            rs.getString("categoria"),
+                            rs.getBoolean("disponibilidade"),
+                            rs.getInt("mercado_id")
                     ));
                 }
             }
@@ -75,12 +76,12 @@ public class ProdutoDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     produtos.add(new Produto(
-                        rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getFloat("preco"),
-                        rs.getString("categoria"),
-                        rs.getBoolean("disponibilidade"),
-                        rs.getInt("mercado_id")
+                            rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getFloat("preco"),
+                            rs.getString("categoria"),
+                            rs.getBoolean("disponibilidade"),
+                            rs.getInt("mercado_id")
                     ));
                 }
             }
@@ -98,4 +99,25 @@ public class ProdutoDAO {
             }
         }
     }
+
+    public Produto buscarProdutoPorNome(String nomeProduto) throws SQLException {
+        String sql = "SELECT * FROM produto WHERE nome = ?";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setString(1, nomeProduto);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getFloat("preco"), // Alterando para float para coincidir com a classe Produto
+                        rs.getString("categoria"),
+                        rs.getBoolean("disponibilidade"),
+                        rs.getInt("mercado_id")
+                );
+
+            }
+        }
+        return null; // Retorna null se não encontrar o produto
+    }
+
 }

@@ -5,27 +5,23 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexaoMySQL {
-    private static final String URL = "jdbc:mysql://localhost:3306/buscai";
+    private static final String URL = "jdbc:mysql://localhost:3306/buscai?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USUARIO = "root"; 
     private static final String SENHA = "@Henri0202";
 
+    // Obtém uma nova conexão com o banco de dados
     public static Connection getConexao() throws SQLException {
-        try {
-            // O driver é carregado automaticamente, portanto, pode ser removido
-            return DriverManager.getConnection(URL, USUARIO, SENHA);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new SQLException("Erro ao conectar ao banco de dados: " + e.getMessage());
-        }
+        return DriverManager.getConnection(URL, USUARIO, SENHA);
     }
 
+    // Fecha a conexão com o banco de dados de forma segura
     public static void fecharConexao(Connection conexao) {
-        try {
-            if (conexao != null) {
+        if (conexao != null) {
+            try {
                 conexao.close();
+            } catch (SQLException e) {
+                System.err.println("Erro ao fechar a conexão: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

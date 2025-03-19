@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import javafx.application.Platform;
 
 public class AdicionarProdutoController {
+
     @FXML
     private TextField nomeProdutoField;
     @FXML
@@ -42,9 +43,9 @@ public class AdicionarProdutoController {
     public void initialize() {
         // Preenche a ChoiceBox com as categorias
         categoriaProdutoChoiceBox.setItems(FXCollections.observableArrayList(
-            "Hortifrúti", "Açougue", "Frios e Laticínios", "Padaria", "Mercearia", 
-            "Bebidas", "Congelados", "Matinais", "Alimentos para animais", 
-            "Higiene pessoal", "Limpeza", "Utilidades domésticas", "Papelaria"
+                "Hortifrúti", "Grãos", "Frutas",
+                "Laticínios", "Padaria", "Bebidas",
+                "Limpeza", "Carnes"
         ));
     }
 

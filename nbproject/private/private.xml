@@ -27,9 +27,11 @@
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/EditarProdutoController.java</file>
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/Main.java</file>
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/MenuMercadoController.java</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/CompararPreco.fxml</file>
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/backend/dao/ConexaoMySQL.java</file>
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/controller/AdicionarProdutoController.java</file>
             <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/frontend/views/AdicionaMercado.fxml</file>
+            <file>file:/C:/Users/Henrique/Documents/NetBeansProjects/BuscAi/src/db/buscai_db.sql</file>
         </group>
     </open-files>
 </project-private>

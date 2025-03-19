@@ -1,8 +1,8 @@
 # BuscAi
 
-<div style="text-align: center;">
+<p align="center">
     <img src="buscAi_logo_-_x.png" alt="Logo do BuscAi" width="300"/>
-</div>
+</p>
 
 **BuscAi** é uma plataforma digital para busca e comparação de preços de produtos em diferentes supermercados, projetada para ajudar os usuários a encontrar as melhores ofertas de acordo com suas preferências e localização. A aplicação facilita o acesso a informações de preços e disponibilidade de produtos, promovendo uma experiência prática e intuitiva.
 
@@ -35,4 +35,15 @@ O projeto está organizado nas seguintes camadas:
 ## Tecnologias Utilizadas
 
 - **Java**: Desenvolvimento do backend.
-- **MySQL**: Banco de dados relacional para armazenamento de inform
+- **MySQL**: Banco de dados relacional para armazenamento de informações de mercados e produtos.
+- **Apache NetBeans**: IDE para o desenvolvimento e gerenciamento do projeto.
+- **Git/GitHub**: Controle de versão e colaboração.
+
+## Instalação e Configuração
+
+### 1. Clone o Repositório
+
+```bash
+git clone https://github.com/seu-usuario/BuscAi.git
+cd BuscAi
+```

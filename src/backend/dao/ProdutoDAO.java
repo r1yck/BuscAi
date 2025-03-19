@@ -49,15 +49,23 @@ public class ProdutoDAO {
         }
     }
 
-    public List<Produto> listarProdutos() {
+    public List<Produto> listarProdutosPorMercado(int mercadoId) {
         List<Produto> produtos = new ArrayList<>();
-        String sql = "SELECT * FROM produto";
-        try (Statement stmt = conexao.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Produto produto = new Produto(
-                                        rs.getString("nome"));
-                produtos.add(produto);
+        String sql = "SELECT * FROM produto WHERE mercado_id = ?";
+        try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+            stmt.setInt(1, mercadoId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Produto produto = new Produto(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getFloat("preco"),
+                        rs.getString("categoria"),
+                        rs.getBoolean("disponibilidade"),
+                        rs.getInt("mercado_id")
+                    );
+                    produtos.add(produto);
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

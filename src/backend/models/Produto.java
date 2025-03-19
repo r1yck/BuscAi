@@ -9,7 +9,8 @@ public class Produto {
     private boolean disponibilidade;
     private int mercadoId; 
 
-    public Produto(String nome) {
+    // Construtor que aceita todos os parâmetros
+    public Produto(int id, String nome, float preco, String categoria, boolean disponibilidade, int mercadoId) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
@@ -18,6 +19,7 @@ public class Produto {
         this.mercadoId = mercadoId;
     }
 
+    // Getters e Setters
     public int getId() {
         return id;
     }
@@ -58,7 +60,6 @@ public class Produto {
         this.disponibilidade = disponibilidade;
     }
 
-    // Getter e setter para o mercadoId
     public int getMercadoId() {
         return mercadoId;
     }

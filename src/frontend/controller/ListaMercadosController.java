@@ -1,5 +1,6 @@
 package frontend.controller;
 
+import backend.dao.ConexaoMySQL;
 import backend.dao.MercadoDAO;
 import backend.models.Mercado;
 import javafx.collections.FXCollections;
@@ -13,10 +14,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,21 +27,19 @@ public class ListaMercadosController implements Initializable {
     @FXML
     private ListView<Mercado> listaMercados;
 
-    private Stage stage;
-    private Scene scene;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         carregarMercados();
     }
 
     private void carregarMercados() {
-        try (Connection conexao = DriverManager.getConnection("jdbc:mysql://localhost:3306/buscai", "root", "@Henri0202")) {
+        try (Connection conexao = ConexaoMySQL.getConexao()) {
             MercadoDAO mercadoDAO = new MercadoDAO(conexao);
             List<Mercado> mercados = mercadoDAO.listarMercados();
             ObservableList<Mercado> mercadoObservableList = FXCollections.observableArrayList(mercados);
             listaMercados.setItems(mercadoObservableList);
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.err.println("Erro ao carregar mercados: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -49,17 +49,25 @@ public class ListaMercadosController implements Initializable {
         Mercado mercadoSelecionado = listaMercados.getSelectionModel().getSelectedItem();
         if (mercadoSelecionado != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("frontend/views/ListaProdutos.fxml"));
+                // Carrega a nova cena para produtos do mercado
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/frontend/views/ListaProdutos.fxml"));
                 Parent root = loader.load();
-                
-                // Passa o mercado selecionado para a tela de produtos
-                ListaProdutosController controller = loader.getController();
-                controller.setMercadoSelecionado(mercadoSelecionado);
 
-                stage = (Stage) listaMercados.getScene().getWindow();
-                scene = new Scene(root);
-                stage.setScene(scene);
+                // Obtém o controller e passa o mercado selecionado
+                ListaProdutosController controller = loader.getController();
+                try (Connection conexao = ConexaoMySQL.getConexao()) {
+                    controller.setMercadoSelecionado(mercadoSelecionado, conexao);
+                } catch (SQLException e) {
+                    System.err.println("Erro ao obter conexão: " + e.getMessage());
+                    e.printStackTrace();
+                }
+
+                // Atualiza a cena da janela existente
+                Stage stage = (Stage) listaMercados.getScene().getWindow(); // Obtém a janela atual
+                stage.setScene(new Scene(root));
+                stage.setTitle("Produtos do Mercado"); // Atualiza o título da janela
                 stage.show();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -68,9 +76,9 @@ public class ListaMercadosController implements Initializable {
 
     @FXML
     public void voltaMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("frontend/views/MenuView.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root = FXMLLoader.load(getClass().getResource("/frontend/views/MenuView.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }

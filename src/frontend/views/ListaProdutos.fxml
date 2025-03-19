@@ -6,16 +6,19 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-background-color: FFF;" stylesheets="@listamercadosview.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" 
+      style="-fx-background-color: FFF;" stylesheets="@listamercadosview.css" 
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="frontend.controller.ListaProdutosController">
    <children>
       <HBox layoutX="2.0" layoutY="1.0" prefHeight="122.0" prefWidth="1101.0">
          <children>
@@ -26,7 +29,8 @@
                         <Image url="@../images/buscAi%20logo.png" />
                      </image>
                   </ImageView>
-                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="93.0" stylesheets="@listamercadosview.css" text="Voltar">
+                  <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="68.0" prefWidth="93.0" 
+                          stylesheets="@listamercadosview.css" text="Voltar" onAction="#voltar">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -45,7 +49,14 @@
             </VBox>
          </children>
       </HBox>
-      <Line endX="757.0" endY="-49.99998474121094" layoutX="313.0" layoutY="192.0" startX="-295.4444580078125" startY="-49.99998474121094" style="-fx-stroke: #17CA03;" />
+      
+      <!-- Nome do Mercado -->
+      <Label fx:id="nomeMercadoLabel" layoutX="300.0" layoutY="150.0" text="Nome do Mercado"
+             style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+      
+      <!-- Lista de Produtos -->
+      <ListView fx:id="listaProdutosView" layoutX="300.0" layoutY="200.0" prefHeight="350.0" prefWidth="500.0" />
+
       <VBox layoutX="-1.0" layoutY="145.0" prefHeight="454.0" prefWidth="271.0">
          <children>
             <Label prefHeight="40.0" prefWidth="96.0" text="FILTROS">
@@ -54,18 +65,15 @@
                </font>
                <VBox.margin>
                   <Insets left="20.0" top="20.0" />
-               </VBox.margin></Label>
+               </VBox.margin>
+            </Label>
             <ChoiceBox prefHeight="33.0" prefWidth="230.0" style="-fx-background-color: FFF; -fx-border-color: gray;">
                <VBox.margin>
                   <Insets bottom="10.0" left="20.0" top="15.0" />
                </VBox.margin>
             </ChoiceBox>
-            <Line endX="218.6759796142578" endY="-134.20216369628906" fill="#17ca03" startX="-8.50577163696289" startY="-134.2021942138672" stroke="#17ca03">
-               <VBox.margin>
-                  <Insets left="20.0" right="5.0" top="20.0" />
-               </VBox.margin>
-            </Line>
-            <CheckBox mnemonicParsing="false" prefHeight="71.0" prefWidth="198.0" style="-fx-background-color: FFF;" text="Disponível">
+            <CheckBox mnemonicParsing="false" prefHeight="71.0" prefWidth="198.0" 
+                      style="-fx-background-color: FFF;" text="Disponível">
                <font>
                   <Font size="18.0" />
                </font>
@@ -76,11 +84,6 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </CheckBox>
-            <Line endX="218.6759796142578" endY="-134.20216369628906" fill="#17ca03" layoutX="39.0" layoutY="284.0" startX="-8.50577163696289" startY="-134.2021942138672" stroke="#17ca03">
-               <VBox.margin>
-                  <Insets left="20.0" top="5.0" />
-               </VBox.margin>
-            </Line>
             <Label prefHeight="49.0" prefWidth="184.0" text="Faixa de preço">
                <font>
                   <Font size="18.0" />

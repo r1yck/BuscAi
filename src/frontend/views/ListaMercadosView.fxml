@@ -15,43 +15,44 @@
       xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="frontend.controller.ListaMercadosController">
     
-   <children>
-      <HBox layoutY="-7.0" prefHeight="108.0" prefWidth="1104.0">
-         <children>
-            <ImageView fitHeight="107.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/buscAi%20logo.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
+    <children>
+        <HBox layoutY="-7.0" prefHeight="108.0" prefWidth="1104.0">
+            <children>
+                <ImageView fitHeight="107.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/buscAi%20logo.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </HBox>
 
-      <HBox alignment="BASELINE_LEFT" layoutX="-4.0" layoutY="85.0" prefHeight="54.0" prefWidth="1106.0">
-         <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#voltaMenu"
-                    prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
-               <graphic>
-                  <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Arrow%20left-circle.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <HBox.margin>
-                  <Insets left="20.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
+        <HBox alignment="BASELINE_LEFT" layoutX="-4.0" layoutY="85.0" prefHeight="54.0" prefWidth="1106.0">
+            <children>
+                <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#voltaMenu"
+                        prefHeight="64.0" prefWidth="185.0" stylesheets="@listamercadosview.css" text="Voltar">
+                    <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/Arrow%20left-circle.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                    <font>
+                        <Font name="System Bold" size="15.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="20.0" />
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
 
-      <!-- ADICIONADO: ListView para exibir os mercados -->
-      <ListView fx:id="listaMercados" layoutX="50.0" layoutY="150.0" prefWidth="1000.0"
-                prefHeight="400.0" onMouseClicked="#abrirProdutosMercado"/>
+        <!-- ADICIONADO: ListView para exibir os mercados -->
+        <ListView fx:id="listaMercados" layoutX="50.0" layoutY="150.0" prefWidth="1000.0"
+                  prefHeight="400.0" onMouseClicked="#abrirProdutosMercado"/>
 
-      <Line endX="822.6666259765625" endY="-144.99998474121094" layoutX="248.0" layoutY="284.0"
-            startX="-218.66664123535156" startY="-144.99998474121094" stroke="#17ca03"/>
-   </children>
+
+        <Line endX="822.6666259765625" endY="-144.99998474121094" layoutX="248.0" layoutY="284.0"
+              startX="-218.66664123535156" startY="-144.99998474121094" stroke="#17ca03"/>
+    </children>
 </Pane>

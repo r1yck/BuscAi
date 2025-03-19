@@ -62,7 +62,8 @@ public class AdicionarProdutoController {
 
         try {
             float preco = Float.parseFloat(precoTexto);
-            Produto produto = new Produto(nomeProduto);
+            // Agora criamos o produto passando todos os parâmetros necessários
+            Produto produto = new Produto(0, nomeProduto, preco, categoria, disponibilidade, mercadoId);
             Connection conexao = ConexaoMySQL.getConexao();
             produtoDAO = new ProdutoDAO(conexao);
             produtoDAO.adicionarProduto(produto);

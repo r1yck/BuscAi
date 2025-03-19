@@ -13,24 +13,23 @@
    - Usuários podem consultar produtos específicos e comparar seus preços em diferentes mercados.
 
 2. **Comparação de Preços**
-   - Sistema de comparação de preços, permitindo ao usuário visualizar as melhores ofertas de acordo com critérios definidos.
+   - Sistema de comparação de preços, permitindo ao usuário visualizar as melhores ofertas do produto escolhido.
 
 3. **Filtro de Preferências**
-   - Filtragem de resultados por preço, avaliações, marcas ou disponibilidade.
+   - Filtragem de resultados por preço, categoria ou disponibilidade.
 
 ## Estrutura do Projeto
 
 O projeto está organizado nas seguintes camadas:
 
 - **DAO (Data Access Object)**: Manipulação e gerenciamento de dados para persistência no banco de dados.
-   - **IDatabaseConnection**: Interface para conectar e desconectar do banco de dados.
-   - **MySQLDatabaseConnection**: Implementação específica para o banco de dados MySQL.
+   - **ConexaoMySQL**: Implementação específica para o banco de dados MySQL.
    - **MercadoDAO e ProdutoDAO**: Realizam operações CRUD para as entidades `Mercado` e `Produto`.
-- **Model**: Representação das entidades de negócio (como `Mercado`, `Produto` e `Avaliacao`), com atributos e métodos.
-- **Services**: Lógica de negócios e funcionalidades principais.
-   - **ComparadorDePrecos**: Classe para comparar preços de produtos em mercados.
-   - **FiltroDePreferencias**: Métodos para filtrar produtos conforme disponibilidade, preço e marca.
-   - **AplicativoBuscAi**: Classe principal que integra as funcionalidades do sistema.
+- **Model**: Representação das entidades de negócio (como `Mercado` e `Produto`), com atributos e métodos.
+- **Controllers**: Lógica de negócios e funcionalidades principais.
+   - **CompararPrecoController**: Classe para comparar preços de produtos em mercados.
+   - **ListaProdutosController**: Métodos para filtrar produtos conforme disponibilidade, preço e marca.
+   - **Main**: Classe principal que inicia o sistema.
 
 ## Tecnologias Utilizadas
 
